@@ -1,0 +1,22 @@
+import mysql.connector
+
+con = mysql.connector.connect(
+    user = "root",
+    password = "",
+    host = "localhost",
+    database = "dictionary"
+)
+
+cursor = con.cursor()
+
+word=input("Enter the word: ")
+
+query = cursor.execute("SELECT definition FROM dictionary.entries WHERE word = '%s'" % word)
+
+results = cursor.fetchall()
+
+if results:
+    for result in results:
+        print(result[0])
+else:
+    print("No word found!")
